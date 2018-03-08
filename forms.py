@@ -24,5 +24,4 @@ class RegistrationForm(FlaskForm):
 	dietary_other = StringField("Other Dietary")
 	food_allergies = StringField("Food Allergies")
 	number_of_family = IntegerField("Number of Family Members", validators=[DataRequired()])
-	family_names = FieldList(StringField('Family Member Name'), min_entries=1, max_entries=7)
-	family_ages = FieldList(StringField('Family Member Age'), min_entries=1, max_entries=7)
+	family_details = StringField("Family Names & Ages")

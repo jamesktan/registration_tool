@@ -11,16 +11,30 @@
 <br>
 <br>
 <div class="container">
+
+<!-- Show Errors -->
+	{% if form.errors %}
+	  {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+	      {% for error in field_errors %}
+
+	          <div class="alert alert-danger">
+	            {{ form[field_name].label }}: {{ error }}
+	          </div>
+	      {% endfor %}
+	  {% endfor %}
+	{% endif %}
+
+
 	<div class='row'>
 		<div class='col-md-6'>
 			<h1>Step 1 - Fill Out Your Details</h1>
+			<small><a href='/'>go back</a></small>
 			<hr>
-		</div>
-	</div>
-	<BR>
-	<div class='row'>
-		<div class='col-md-6'>
+			<p>
+				The following information will help us to prepare for your arrival and arrange rooms and meals appropriately.
+			</p>
 
+		
 			<form action="/step1" method="POST">
 
 				<div class="form-group">
@@ -66,9 +80,11 @@
 					{{form.number_of_family(class="form-control")}}
 				</div>
 
-				<BR>
-				{{form.family_names}}
-				{{form.family_ages}}
+
+				<div class='form-group'>
+					{{form.family_details.label}}
+					{{form.family_details(class="form-control")}}
+				</div>
 
 		  		{{ form.csrf_token }}
 		  		
@@ -78,6 +94,14 @@
 
 			</form>
 
+		</div>
+		<div class='col-md-6'>
+			<BR><BR><BR>
+			<img src='/static/bosch2.jpg' width=100%></img>
+			<BR><BR>
+			<img src='/static/bosch4.jpg' width=100%></img>
+			<BR><BR>
+			<img src='/static/bosch3.jpg' width=100%></img>
 		</div>
 	</div>
 </div>

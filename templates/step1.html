@@ -1,0 +1,87 @@
+<html>
+<head>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<br>
+<br>
+<div class="container">
+	<div class='row'>
+		<div class='col-md-6'>
+			<h1>Step 1 - Fill Out Your Details</h1>
+			<hr>
+		</div>
+	</div>
+	<BR>
+	<div class='row'>
+		<div class='col-md-6'>
+
+			<form action="/step1" method="POST">
+
+				<div class="form-group">
+					{{ form.name.label() }}
+					{{ form.name(class="form-control") }}
+				</div>
+
+				<div class="form-group">
+					{{ form.email.label }}
+					{{ form.email(class="form-control") }}
+				</div>
+
+				<div class="form-group">
+					{{ form.phone.label }}
+					{{ form.phone(class="form-control") }}
+				</div>
+
+				<div class="form-group">
+					{{ form.community.label }}
+					{{ form.community(class="form-control") }}
+				</div>
+
+				<div class="form-group">
+					{{ form.days.label }}
+					{{ form.days }}
+				</div>
+
+				<div class='form-group'>
+				{{ form.dietary.label }}
+				{{ form.dietary }}
+				</div>
+
+				<div class='form-group'>
+				Other Food Restrictions: {{ form.dietary_other(class='form-control') }}
+				</div>
+				
+				<div class='form-group'>
+				Life-Threatening Allergies: {{ form.food_allergies(class='form-control') }}
+				</div>
+
+				<div class='form-group'>
+					{{form.number_of_family.label}}
+					{{form.number_of_family(class="form-control")}}
+				</div>
+
+				<BR>
+				{{form.family_names}}
+				{{form.family_ages}}
+
+		  		{{ form.csrf_token }}
+		  		
+		  		<hr>
+
+		  		<button class='btn btn-primary' type='submit'>Submit</button>
+
+			</form>
+
+		</div>
+	</div>
+</div>
+
+</body>
+
+</html>

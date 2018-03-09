@@ -73,7 +73,7 @@ def step1():
 
 		wks.insert_rows(row=1, number=1, values=values_list)
 
-		if wks.get_all_values() > max_users :
+		if len(wks.get_all_values()) > max_users :
 			return redirect(url_for('waitlist',number_family=number_family, token=token))
 		else:
 			return redirect(url_for('step2',number_family=number_family, token=token))

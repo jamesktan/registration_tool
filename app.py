@@ -76,7 +76,7 @@ def step1():
 			return redirect(url_for('waitlist',number_family=number_family, token=token))
 		else:
 			return redirect(url_for('step2',number_family=number_family, token=token))
-			
+
 	return render_template("step1.html", form=form)
 
 @app.route("/step2/<number_family>/<token>", methods=['GET','POST'])
@@ -124,4 +124,4 @@ def waitlist():
 
 if __name__ == '__main__' :
 
-	app.run(debug=True,host='0.0.0.0')
+	app.run(debug=True)

@@ -12,6 +12,7 @@ import uuid
 app = Flask(__name__)
 app.secret_key = "sekret"
 
+max_users = 60
 
 stripe.api_key = "sk_test_4RfmxtTrHP0R0mebD2aCtlmj"
 gc = pygsheets.authorize(service_file='client_secret.json')
@@ -72,7 +73,7 @@ def step1():
 
 		wks.insert_rows(row=1, number=1, values=values_list)
 
-		if wks.rows > 1 :
+		if wks.rows > max_users :
 			return redirect(url_for('waitlist',number_family=number_family, token=token))
 		else:
 			return redirect(url_for('step2',number_family=number_family, token=token))

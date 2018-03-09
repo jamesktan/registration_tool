@@ -27,8 +27,8 @@ class RegistrationForm(FlaskForm):
 	number_of_adults = IntegerField("Number of Adults Attending", validators=[DataRequired()])
 	names_of_adults = StringField("Names of Adults")
 
-	number_of_children = IntegerField("Number of Children Attending", validators=[DataRequired()])
+	number_of_children = IntegerField("Number of Children Attending", validators=[])
 	names_of_children = StringField("Names of Children")
 
-	number_of_jy = IntegerField("Number of Youth Attending", validators=[DataRequired()])
+	number_of_jy = IntegerField("Number of Youth Attending", validators=[])
 	names_of_jy = StringField("Names of JY")

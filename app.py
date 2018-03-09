@@ -91,7 +91,7 @@ def step2(number_family,token):
 		charge = stripe.Charge.create(
 			amount=167*100*user_count,
 			currency="usd",
-			description=user_token + "Charged",
+			description=user_token + " Charged",
 			source=token,
 		)
 
@@ -102,9 +102,9 @@ def step2(number_family,token):
 		row = cell.row
 		cell_amount_id = "M" + str(row)
 		cell_token_id = "N" + str(row)
-		# wks.update_cell(cell_amount_id,amount)
-		# print(charge)
-		# wks.update_cell(cell_token_id,charge)
+		wks.update_cell(cell_amount_id,amount)
+		print(charge.id)
+		wks.update_cell(cell_token_id,charge.id)
 
 
 		return redirect(url_for('success'))
@@ -112,9 +112,11 @@ def step2(number_family,token):
 
 @app.route("/success",methods=['GET'])
 def success():
-
 	return render_template("success.html")
 
+@app.route("/waitlist", methods=['GET'])
+def waitlist():
+	return render_template("waitlist.html")
 
 if __name__ == '__main__' :
 

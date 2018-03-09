@@ -16,22 +16,21 @@
 			<h1>Step 2 - Payment </h1>
 			<hr>
 			<p>
-				The cost is approximately $160 per person attending. Unfortunately we cannot split individual days and must charge for the entire block. Children attending cost only $50 per day.
+				The cost is $148 per adult, $78 per junior youth, and $48 per toddler attending.
 			</p>
-			<br>
 			<p>
 				Financial assistance is provided on an on-need basis. Please comtact us at <a href='mailto:eastbay.atc@rbcca.org'>eastbay.atc@rbcca.org</a> if you would like more details.
 			</p>
 
 			<hr>
 			
-			<form action="/step2/{{count}}/{{token}}" method="POST">
+			<form action="/step2/{{total}}/{{token}}" method="POST">
 				<input name='user_token' value="{{token}}" hidden></input>
-				<input name='user_count' value="{{count}}" hidden></input>
+				<input name='user_total' value="{{total}}" hidden></input>
 			  <script
 			    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 			    data-key="pk_test_4RfmKWmuQPmntloRX8x4xKIH"
-			    data-amount="{{167.0 * count * 100}}"
+			    data-amount="{{total}}"
 			    data-name="East Bay ATC"
 			    data-description="April 2018 Cluster Retreat"
 			    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"

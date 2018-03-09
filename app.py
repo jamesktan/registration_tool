@@ -20,8 +20,6 @@ sh = gc.open('Paid Signups')
 wks = sh[0]
 
 
-
-
 @app.route("/",methods=['GET', 'POST'])
 def main():
 	form = RegistrationForm()
@@ -66,48 +64,68 @@ def step1():
 		values_list.append(dietary_other)
 		food_allergies = form.food_allergies.data
 		values_list.append(food_allergies)
-		number_family = form.number_of_family.data
-		values_list.append(number_family)
-		family_details = form.family_details.data
-		values_list.append(family_details)
+
+
+		number_adults = form.number_of_adults.data
+		names_adults = form.names_of_adults.data
+
+		number_jy = form.number_of_jy.data
+		names_jy = form.names_of_jy.data
+
+		number_toddler = form.number_of_children.data
+		names_toddler = form.names_of_children.data
+
+		values_list.append(number_adults)
+		values_list.append(names_adults)
+		values_list.append(number_jy)
+		values_list.append(names_jy)
+		values_list.append(number_toddler)
+		values_list.append(names_toddler)
+
+		if len(wks.get_all_values()) > max_users :
+			values_list.append("waitlist")
+		else:
+			values_list.append("registered")
 
 		wks.insert_rows(row=1, number=1, values=values_list)
 
+
+		# Calculate Cost
+		total = (148 * int(number_adults)) + (78 * int(number_jy)) + (48*int(number_toddler)) 
+		total_cents = total * 100
+
 		if len(wks.get_all_values()) > max_users :
-			return redirect(url_for('waitlist',number_family=number_family, token=token))
+			return redirect(url_for('waitlist'))
 		else:
-			return redirect(url_for('step2',number_family=number_family, token=token))
+			return redirect(url_for('step2',total=total_cents, token=token))
 
 	return render_template("step1.html", form=form)
 
-@app.route("/step2/<number_family>/<token>", methods=['GET','POST'])
-def step2(number_family,token):
+@app.route("/step2/<total>/<token>", methods=['GET','POST'])
+def step2(total,token):
 	if request.method == 'GET':
-		count = int(number_family)
-		return render_template("step2.html", count=count, token=token)
+		return render_template("step2.html", total=total, token=token)
 	if request.method == 'POST':
 
 		user_token = request.form.get('user_token')
-		user_count = int(request.form.get('user_count'))
+		user_total = int(request.form.get('user_total'))
 
 		token = request.form['stripeToken'] # Using Flask
 
 		# # Charge the user's card:
 		charge = stripe.Charge.create(
-			amount=167*100*user_count,
+			amount=user_total,
 			currency="usd",
 			description=user_token + " Charged",
 			source=token,
 		)
 
-		# Updarte the spreadsheet with the charge token and amount
-		amount = 167.0*100*user_count
-
+		# Update the spreadsheet with the charge token and amount
 		cell = wks.find(user_token)[0]
 		row = cell.row
-		cell_amount_id = "M" + str(row)
-		cell_token_id = "N" + str(row)
-		wks.update_cell(cell_amount_id,amount)
+		cell_amount_id = "R" + str(row)
+		cell_token_id = "S" + str(row)
+		wks.update_cell(cell_amount_id,user_total)
 		print(charge.id)
 		wks.update_cell(cell_token_id,charge.id)
 

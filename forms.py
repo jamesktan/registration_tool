@@ -23,5 +23,12 @@ class RegistrationForm(FlaskForm):
 		option_widget=CheckboxInput(),widget=ListWidget(prefix_label=False))
 	dietary_other = StringField("Other Dietary")
 	food_allergies = StringField("Food Allergies")
-	number_of_family = IntegerField("Number of Family Members", validators=[DataRequired()])
-	family_details = StringField("Family Names & Ages")
+
+	number_of_adults = IntegerField("Number of Adults Attending", validators=[DataRequired()])
+	names_of_adults = StringField("Names of Adults")
+
+	number_of_children = IntegerField("Number of Children Attending", validators=[DataRequired()])
+	names_of_children = StringField("Names of Children")
+
+	number_of_jy = IntegerField("Number of Youth Attending", validators=[DataRequired()])
+	names_of_jy = StringField("Names of JY")

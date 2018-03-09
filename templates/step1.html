@@ -6,6 +6,12 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+	<style type="text/css">
+		ul {
+  			list-style-type: none;
+		}
+
+	</style>
 </head>
 <body>
 <br>
@@ -30,13 +36,11 @@
 			<h1>Step 1 - Fill Out Your Details</h1>
 			<small><a href='/'>go back</a></small>
 			<hr>
-			<p>
-				The following information will help us to prepare for your arrival and arrange rooms and meals appropriately.
-			</p>
 
 		
 			<form action="/step1" method="POST">
 
+				<h3>Basic Information</h3>
 				<div class="form-group">
 					{{ form.name.label() }}
 					{{ form.name(class="form-control") }}
@@ -62,6 +66,8 @@
 					{{ form.days }}
 				</div>
 
+				<h3>Dietary Information</h3>
+
 				<div class='form-group'>
 				{{ form.dietary.label }}
 				{{ form.dietary }}
@@ -74,17 +80,32 @@
 				<div class='form-group'>
 				Life-Threatening Allergies: {{ form.food_allergies(class='form-control') }}
 				</div>
+				
+				<h3>Attendee Information</h3>
 
 				<div class='form-group'>
-					{{form.number_of_family.label}}
-					{{form.number_of_family(class="form-control")}}
+					Number of Adults Attending (15+):
+					{{form.number_of_adults(class="form-control", value=1)}}
+					Names:
+					{{form.names_of_adults(class="form-control")}}
+				</div>
+
+				<div class='form-group'>
+					Number of Junior Youth / Children Attending (4 to 14):
+					{{form.number_of_jy(class="form-control", value=0)}}
+					Names:
+					{{form.names_of_jy(class="form-control")}}
+				</div>
+
+				<div class='form-group'>
+					Number of Toddlers Attending (2 to 3):
+					{{form.number_of_children(class="form-control", value=0)}}
+					Names:
+					{{form.names_of_children(class="form-control")}}
+
 				</div>
 
 
-				<div class='form-group'>
-					{{form.family_details.label}}
-					{{form.family_details(class="form-control")}}
-				</div>
 
 		  		{{ form.csrf_token }}
 		  		

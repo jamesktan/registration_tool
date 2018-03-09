@@ -72,7 +72,11 @@ def step1():
 
 		wks.insert_rows(row=1, number=1, values=values_list)
 
-		return redirect(url_for('step2',number_family=number_family, token=token))
+		if wks.rows > 1 :
+			return redirect(url_for('waitlist',number_family=number_family, token=token))
+		else:
+			return redirect(url_for('step2',number_family=number_family, token=token))
+			
 	return render_template("step1.html", form=form)
 
 @app.route("/step2/<number_family>/<token>", methods=['GET','POST'])
